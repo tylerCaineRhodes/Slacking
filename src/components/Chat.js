@@ -13,52 +13,51 @@ function Chat() {
   const [roomMessages, setRoomMessages] = useState([]);
 
   useEffect(() => {
-    if(roomId) {
+    if (roomId) {
       db.collection('rooms')
-      .doc(roomId)
-      .onSnapshot(snapshot => (
-        setRoomDetails(snapshot.data())
-      ))
+        .doc(roomId)
+        .onSnapshot((snapshot) => setRoomDetails(snapshot.data()));
       db.collection('rooms')
-      .doc(roomId)
-      .collection('messages')
-      .orderBy('timestamp', 'asc')
-      .onSnapshot(snapshot => setRoomMessages(snapshot.docs.map(doc => doc.data())))
+        .doc(roomId)
+        .collection('messages')
+        .orderBy('timestamp', 'asc')
+        .onSnapshot((snapshot) =>
+          setRoomMessages(snapshot.docs.map((doc) => doc.data()))
+        );
     }
-
-  }, [roomId])
+  }, [roomId]);
 
   return (
     <div className='chat'>
       <div className='chatHeader'>
-        <div className="chatHeaderLeft">
-          <h4 className="chatChannelName">
-            <strong>#{ roomDetails?.name }</strong>
+        <div className='chatHeaderLeft'>
+          <h4 className='chatChannelName'>
+            <strong>#{roomDetails?.name}</strong>
             <StarBorderOutlinedIcon />
           </h4>
         </div>
-        <div className="chatHeaderRight">
+        <div className='chatHeaderRight'>
           <p>
             <InfoOutlinedIcon /> Details
           </p>
         </div>
       </div>
 
-      <div className="chatMessages">
-        {roomMessages.map(({message, timestamp, user, userImage}) => (
+      <div className='chatMessages'>
+        {roomMessages.map(({ message, timestamp, user, userImage }) => (
           <div key={timestamp}>
-            <Message 
-              message={ message }
-              timestamp ={ timestamp }
-              user={ user }
-              userImage={ userImage }
+            <Message
+              message={message}
+              timestamp={timestamp}
+              user={user}
+              userImage={userImage}
             />
           </div>
         ))}
       </div>
       <ChatInput channelName={roomDetails?.name} channelId={roomId} />
     </div>
-  )
+  );
 }
 
-export default Chat
+export default Chat;

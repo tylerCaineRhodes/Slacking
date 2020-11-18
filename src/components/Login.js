@@ -9,18 +9,19 @@ function Login() {
   const [state, dispatch] = useStateValue();
 
   const signIn = () => {
-    auth.signInWithPopup(provider)
-    .then(result => {
-      console.log(result)
-      dispatch({
-        type: actionType.SET_USER,
-        user: result.user
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+        dispatch({
+          type: actionType.SET_USER,
+          user: result.user,
+        });
       })
-    })
-    .catch(err => {
-      alert(err.message)
-    })
-  }
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
   return (
     <div className='login'>
@@ -31,7 +32,7 @@ function Login() {
         />
         <h1>Sign in to user</h1>
         <p>whatever.slack.com</p>
-        <Button onClick={ signIn }>Sign in with Google</Button>
+        <Button onClick={signIn}>Sign in with Google</Button>
       </div>
     </div>
   );

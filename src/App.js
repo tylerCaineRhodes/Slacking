@@ -15,7 +15,7 @@ function App() {
       <Router>
         {!user ? (
           <Login />
-        ): (
+        ) : (
           <>
             <Header />
             <div className='appBody'>

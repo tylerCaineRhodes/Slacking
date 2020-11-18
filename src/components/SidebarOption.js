@@ -7,30 +7,33 @@ function SidebarOption({ Icon, title, id, addChannelOption }) {
   const history = useHistory();
 
   const selectChannel = () => {
-    if(id) {
-      history.push(`/room/${id}`)
+    if (id) {
+      history.push(`/room/${id}`);
     } else {
-      history.push(title)
+      history.push(title);
     }
-  }
+  };
 
   const addChannel = () => {
     const channelName = prompt('Please enter the channel name');
-    if(channelName) {
+    if (channelName) {
       db.collection('rooms').add({
-        name: channelName
-      })
+        name: channelName,
+      });
     }
-  }
+  };
 
   return (
-    <div className='sidebarOption' onClick={addChannelOption ? addChannel: selectChannel} >
+    <div
+      className='sidebarOption'
+      onClick={addChannelOption ? addChannel : selectChannel}
+    >
       {Icon && <Icon className='sidebarOptionIcon' />}
       {Icon ? (
         <h3>{title}</h3>
       ) : (
         <h3 className='sidebarOptionChannel'>
-          <span className='sidebarOptionHash'>#</span> 
+          <span className='sidebarOptionHash'>#</span>
           {title}
         </h3>
       )}
@@ -38,4 +41,4 @@ function SidebarOption({ Icon, title, id, addChannelOption }) {
   );
 }
 
-export default SidebarOption
+export default SidebarOption;
