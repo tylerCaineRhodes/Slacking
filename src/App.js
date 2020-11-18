@@ -24,8 +24,6 @@ function App() {
                 <Route path='/room/:roomId'>
                   <Chat />
                 </Route>
-                {/* <Route path='/'>
-                </Route> */}
               </Switch>
             </div>
           </>
